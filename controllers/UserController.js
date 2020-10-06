@@ -2,6 +2,7 @@ const {
     User
 } = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const UserController = {
 
     async signup(req, res) {
@@ -26,15 +27,19 @@ const UserController = {
             })
             if (!user) {
                 return res.status(400).send({
-                    message: 'Wrong email'
+                    message: 'Wrong credentials'
                 })
             }
             const isMatch = await bcrypt.compare(req.body.password, user.password)
             if (!isMatch) {
                 return res.status(400).send({
-                    message: 'Wrong password'
+                    message: 'Wrong credentials'
                 })
             }
+            const token = jwt.sign({ id: user.id }, 'mimamamemima');
+            console.log(token)
+            user.token = token; //añade el token a la instancia user
+            user.reload() // actualiza en la base de datos la instancia de user
             res.send(user);
         } catch (error) {
             console.error(error);
