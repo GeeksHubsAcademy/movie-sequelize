@@ -36,10 +36,10 @@ const UserController = {
                     message: 'Wrong credentials'
                 })
             }
-            const token = jwt.sign({ id: user.id }, 'mimamamemima');
+            const token = jwt.sign({ id: user.id }, 'mimamamemima', { expiresIn: '30d' });
             console.log(token)
             user.token = token; //añade el token a la instancia user
-            user.reload() // actualiza en la base de datos la instancia de user
+            await user.save() // valida & actualiza en la base de datos la instancia de user
             res.send(user);
         } catch (error) {
             console.error(error);
