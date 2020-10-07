@@ -37,7 +37,6 @@ const UserController = {
                 })
             }
             const token = jwt.sign({ id: user.id }, 'mimamamemima', { expiresIn: '30d' });
-            console.log(token)
             user.token = token; //añade el token a la instancia user
             await user.save() // valida & actualiza en la base de datos la instancia de user
             res.send(user);
@@ -46,7 +45,8 @@ const UserController = {
             res.status(500).send({ message: 'There was a problem trying to login' })
         }
 
-    }
+    },
+
 }
 
 module.exports = UserController;

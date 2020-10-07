@@ -25,7 +25,7 @@ module.exports = {
             const total_pages = await addMovies(movies, 1)
                 //muta la array
                 // movies = movies.concat(first20Movies)//concatena la array
-            for (let i = 2; i < total_pages; i++) {
+            for (let i = 2; i < 120; i++) {
                 await addMovies(movies, i);
                 console.log(i)
             }
