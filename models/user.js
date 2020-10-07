@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            this.hasMany(models.Order); //One to Many
         }
     };
 
@@ -24,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         modelName: 'User',
     });
     User.prototype.toJSON = function() { //override/sobreescritura del método
-        var values = this.get();
-        delete values.password;
-        return values;
+        const user = this.get();
+        delete user.password;
+        return user;
     }
     return User;
 };
