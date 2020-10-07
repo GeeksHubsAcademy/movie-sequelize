@@ -5,6 +5,7 @@
 # Quick start
 
 ## Run the backend
+- Convert .env.example to .env
 
 - npm install
 

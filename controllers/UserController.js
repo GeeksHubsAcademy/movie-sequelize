@@ -44,6 +44,11 @@ const UserController = {
                     message: 'Wrong credentials'
                 })
             }
+            if (!user.confirmed) {
+                return res.status(400).send({
+                    message: 'Confirm your email'
+                })
+            }
             const isMatch = await bcrypt.compare(req.body.password, user.password)
             if (!isMatch) {
                 return res.status(400).send({
